@@ -1,7 +1,22 @@
-{
-  "name": "my-simple-app",
-  "version": "1.0.0",
-  "scripts": {
-    "test": "echo \"Tests passed!\""
-  }
-}
+name: Build and Test Node.js Project
+on: [push]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # This action sets up the Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
